@@ -5,6 +5,7 @@ import (
 	"reflect"
 	"strings"
 
+	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v2"
 )
@@ -27,13 +28,13 @@ func init() {
 func yamlFunc(_ *cobra.Command, _ []string) {
 	rawFile, err := os.ReadFile(inputPath)
 	if err != nil {
-		panic(err)
+		log.WithError(err).WithField("path", inputPath).Fatal("error in reading the input config example file")
 	}
 
 	var parsedConfig map[interface{}]interface{}
 	err = yaml.Unmarshal(rawFile, &parsedConfig)
 	if err != nil {
-		panic(err)
+		log.WithError(err).Fatal("error in unmarshalling the file with YAML format")
 	}
 
 	var configMap = map[interface{}]interface{}{}
@@ -42,21 +43,22 @@ func yamlFunc(_ *cobra.Command, _ []string) {
 
 	rawConfigMap, err := yaml.Marshal(configMap)
 	if err != nil {
-		panic(err)
+		log.WithError(err).Fatal("error in marshalling the configmap file with YAML format")
 	}
 
 	err = os.WriteFile(configMapPath, rawConfigMap, 0644)
 	if err != nil {
-		panic(err)
+		log.WithError(err).WithField("path", configMapPath).Fatal("error in storing the configmap file")
 	}
 
 	rawValues, err := yaml.Marshal(values)
 	if err != nil {
-		panic(err)
+		log.WithError(err).Fatal("error in marshalling the values file with YAML format")
 	}
+
 	err = os.WriteFile(valuesPath, rawValues, 0644)
 	if err != nil {
-		panic(err)
+		log.WithError(err).WithField("path", valuesPath).Fatal("error in storing the values file")
 	}
 }
 
