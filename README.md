@@ -19,9 +19,9 @@ go build .
 ~~~
 3. Put your ```config.example.yml``` near the compiled binary and run it via:
 ~~~bash
-./helmfig
+./helmfig yaml
 ~~~
-3. If everything is OK, two files will be generated: ```configmap.yaml``` and ```values.yaml```. You can use them in
+4. If everything is OK, two files will be generated: ```configmap.yaml``` and ```values.yaml```. You can use them in
 helm chart of your desired application
 
 ## License

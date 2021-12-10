@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"fmt"
 	"io/ioutil"
 	"reflect"
 	"strings"
@@ -19,10 +18,14 @@ var yamlCMD = &cobra.Command{
 
 func init() {
 	rootCMD.AddCommand(yamlCMD)
+
+	yamlCMD.PersistentFlags().StringVarP(&inputPath, "example-config", "x", "config.example.yml", "Path to example yaml config file")
+	yamlCMD.PersistentFlags().StringVar(&configMapPath, "configmap", "configmap.yaml", "Path to configmap file output")
+	yamlCMD.PersistentFlags().StringVar(&valuesPath, "values", "values.yaml", "Path to values file output")
 }
 
 func yamlFunc(_ *cobra.Command, _ []string) {
-	rawFile, err := ioutil.ReadFile("config.example.yml")
+	rawFile, err := ioutil.ReadFile(inputPath)
 	if err != nil {
 		panic(err)
 	}
@@ -42,7 +45,7 @@ func yamlFunc(_ *cobra.Command, _ []string) {
 		panic(err)
 	}
 
-	err = ioutil.WriteFile("configmap.yaml", rawConfigMap, 0644)
+	err = ioutil.WriteFile(configMapPath, rawConfigMap, 0644)
 	if err != nil {
 		panic(err)
 	}
@@ -51,7 +54,7 @@ func yamlFunc(_ *cobra.Command, _ []string) {
 	if err != nil {
 		panic(err)
 	}
-	err = ioutil.WriteFile("values.yaml", rawValues, 0644)
+	err = ioutil.WriteFile(valuesPath, rawValues, 0644)
 	if err != nil {
 		panic(err)
 	}
@@ -72,7 +75,6 @@ func f(m, configMap, values map[interface{}]interface{}, valuesPath string) {
 		} else {
 			configMap[k] = "{{ " + valuesPath + convertName(k.(string)) + " }}"
 			values[convertName(k.(string))] = v
-			fmt.Println(k, v, reflect.TypeOf(v))
 		}
 	}
 }
