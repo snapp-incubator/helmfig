@@ -86,17 +86,22 @@ natsStreaming:
 ### Build from source
 
 1. Install a golang compiler (at least version 1.16).
+
 2. Clone the project and compile it:
-~~~bash
+
+```bash
 git clone https://github.com/snapp-incubator/helmfig.git
 cd helmfig
 go build .
-~~~
+```
+
 3. Put your ```config.example.yml``` near the compiled binary and run it via:
-~~~bash
+
+```bash
 ./helmfig yaml
-~~~
-4. If everything is OK, two files will be generated: ```configmap.yaml``` and ```values.yaml```. You can use them in
+```
+
+4. If everything is OK, two files will be generated: `configmap.yaml` and `values.yaml`. You can use them in
 helm chart of your desired application
 
 ## License
