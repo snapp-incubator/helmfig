@@ -1,4 +1,7 @@
-on: push
+on:
+  create:
+    tags:
+      - v*
 
 jobs:
   releases-matrix:
