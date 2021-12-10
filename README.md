@@ -1,5 +1,7 @@
 # Helmfig
 
+![GitHub Workflow Status](![example workflow](https://github.com/snapp-incubator/helmfig/actions/workflows/release.yaml/badge.svg))
+
 Are you tired of writing `values.yaml` for `configmap` of your project when you are helmifying them? Helmfig is a handy 
 tool that can generate the content of your `configmap` object and its parameters for `values.yaml` based on a config
 example file.
@@ -7,6 +9,14 @@ example file.
 Currently, we just support YAML config structure, but we will support JSON and ENV in the future.
 
 ## How to use it?
+
+### Download released binary
+
+1. Go to release page of the repo and download the appropriate released binary with regard to your OS and arch.
+
+2. Put it in one of PATH directories
+
+3. Run it by simply typing `helmfig` in your desired terminal.
 
 ### Build from source
 
