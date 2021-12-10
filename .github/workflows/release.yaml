@@ -1,7 +1,6 @@
 on:
-  create:
-    tags:
-      - v*
+  release:
+    types: [created]
 
 jobs:
   releases-matrix:
