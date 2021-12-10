@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"io/ioutil"
+	"os"
 	"reflect"
 	"strings"
 
@@ -25,7 +25,7 @@ func init() {
 }
 
 func yamlFunc(_ *cobra.Command, _ []string) {
-	rawFile, err := ioutil.ReadFile(inputPath)
+	rawFile, err := os.ReadFile(inputPath)
 	if err != nil {
 		panic(err)
 	}
@@ -45,7 +45,7 @@ func yamlFunc(_ *cobra.Command, _ []string) {
 		panic(err)
 	}
 
-	err = ioutil.WriteFile(configMapPath, rawConfigMap, 0644)
+	err = os.WriteFile(configMapPath, rawConfigMap, 0644)
 	if err != nil {
 		panic(err)
 	}
@@ -54,7 +54,7 @@ func yamlFunc(_ *cobra.Command, _ []string) {
 	if err != nil {
 		panic(err)
 	}
-	err = ioutil.WriteFile(valuesPath, rawValues, 0644)
+	err = os.WriteFile(valuesPath, rawValues, 0644)
 	if err != nil {
 		panic(err)
 	}
