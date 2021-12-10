@@ -1,6 +1,6 @@
 # Helmfig
 
-![GitHub Workflow Status](![example workflow](https://github.com/snapp-incubator/helmfig/actions/workflows/release.yaml/badge.svg))
+![Release workflow](https://github.com/snapp-incubator/helmfig/actions/workflows/release.yaml/badge.svg)
 
 Are you tired of writing `values.yaml` for `configmap` of your project when you are helmifying them? Helmfig is a handy 
 tool that can generate the content of your `configmap` object and its parameters for `values.yaml` based on a config
