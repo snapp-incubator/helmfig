@@ -38,7 +38,7 @@ func yamlFunc(_ *cobra.Command, _ []string) {
 
 	var configMap = map[interface{}]interface{}{}
 	var values = map[interface{}]interface{}{}
-	f(parsedConfig, configMap, values, "")
+	traverse(parsedConfig, configMap, values, "")
 
 	rawConfigMap, err := yaml.Marshal(configMap)
 	if err != nil {
@@ -64,12 +64,12 @@ func convertName(val string) string {
 	return strings.Replace(val, "_", "", -1)
 }
 
-func f(m, configMap, values map[interface{}]interface{}, valuesPath string) {
+func traverse(m, configMap, values map[interface{}]interface{}, valuesPath string) {
 	for k, v := range m {
 		if reflect.TypeOf(v).Kind() == reflect.Map {
 			var localConfigMap = map[interface{}]interface{}{}
 			var localValues = map[interface{}]interface{}{}
-			f(v.(map[interface{}]interface{}), localConfigMap, localValues, valuesPath+convertName(k.(string))+".")
+			traverse(v.(map[interface{}]interface{}), localConfigMap, localValues, valuesPath+convertName(k.(string))+".")
 			configMap[k] = localConfigMap
 			values[convertName(k.(string))] = localValues
 		} else {
