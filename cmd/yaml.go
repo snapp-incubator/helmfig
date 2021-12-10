@@ -51,6 +51,8 @@ func yamlFunc(_ *cobra.Command, _ []string) {
 		log.WithError(err).WithField("path", configMapPath).Fatal("error in storing the configmap file")
 	}
 
+	log.WithField("path", configMapPath).Info("ConfigMap object content created successfully")
+
 	rawValues, err := yaml.Marshal(values)
 	if err != nil {
 		log.WithError(err).Fatal("error in marshalling the values file with YAML format")
@@ -60,6 +62,8 @@ func yamlFunc(_ *cobra.Command, _ []string) {
 	if err != nil {
 		log.WithError(err).WithField("path", valuesPath).Fatal("error in storing the values file")
 	}
+
+	log.WithField("path", valuesPath).Info("Values parameters created successfully")
 }
 
 func traverse(m, configMap, values map[interface{}]interface{}, valuesPath string) {
