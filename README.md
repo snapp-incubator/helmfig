@@ -23,3 +23,7 @@ go build .
 ~~~
 3. If everything is OK, two files will be generated: ```configmap.yaml``` and ```values.yaml```. You can use them in
 helm chart of your desired application
+
+## License
+
+Apache-2.0 License, see [LICENSE](LICENSE).
