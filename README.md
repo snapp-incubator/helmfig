@@ -13,8 +13,8 @@ Currently, we just support YAML config structure, but we will support JSON and E
 1. Install a golang compiler (at least version 1.16).
 2. Clone the project and compile it:
 ~~~bash
-git clone 
-cd 
+git clone https://github.com/snapp-incubator/helmfig.git
+cd helmfig
 go build .
 ~~~
 3. Put your ```config.example.yml``` near the compiled binary and run it via:
