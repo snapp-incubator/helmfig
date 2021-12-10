@@ -3,8 +3,8 @@ package cmd
 import (
 	"os"
 	"reflect"
-	"strings"
 
+	"github.com/iancoleman/strcase"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v2"
@@ -62,21 +62,18 @@ func yamlFunc(_ *cobra.Command, _ []string) {
 	}
 }
 
-func convertName(val string) string {
-	return strings.Replace(val, "_", "", -1)
-}
-
 func traverse(m, configMap, values map[interface{}]interface{}, valuesPath string) {
 	for k, v := range m {
+		lowerCamelKey := strcase.ToLowerCamel(k.(string))
 		if reflect.TypeOf(v).Kind() == reflect.Map {
 			var localConfigMap = map[interface{}]interface{}{}
 			var localValues = map[interface{}]interface{}{}
-			traverse(v.(map[interface{}]interface{}), localConfigMap, localValues, valuesPath+convertName(k.(string))+".")
+			traverse(v.(map[interface{}]interface{}), localConfigMap, localValues, valuesPath+lowerCamelKey+".")
 			configMap[k] = localConfigMap
-			values[convertName(k.(string))] = localValues
+			values[lowerCamelKey] = localValues
 		} else {
-			configMap[k] = "{{ " + valuesPath + convertName(k.(string)) + " }}"
-			values[convertName(k.(string))] = v
+			configMap[k] = "{{ " + valuesPath + lowerCamelKey + " }}"
+			values[lowerCamelKey] = v
 		}
 	}
 }
