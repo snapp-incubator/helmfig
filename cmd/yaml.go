@@ -76,7 +76,7 @@ func traverse(m, configMap, values map[interface{}]interface{}, valuesPath strin
 			configMap[k] = localConfigMap
 			values[lowerCamelKey] = localValues
 		} else {
-			configMap[k] = "{{ " + valuesPath + lowerCamelKey + " }}"
+			configMap[k] = "{{ .Values." + valuesPath + lowerCamelKey + " }}"
 			values[lowerCamelKey] = v
 		}
 	}
