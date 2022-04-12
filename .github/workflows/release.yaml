@@ -25,3 +25,4 @@ jobs:
           goarch: ${{ matrix.goarch }}
           project_path: "."
           extra_files: LICENSE README.md
+          goversion: 1.16
