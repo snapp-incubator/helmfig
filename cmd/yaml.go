@@ -3,6 +3,7 @@ package cmd
 import (
 	"os"
 	"reflect"
+	"strings"
 
 	"github.com/iancoleman/strcase"
 	log "github.com/sirupsen/logrus"
@@ -46,7 +47,10 @@ func yamlFunc(_ *cobra.Command, _ []string) {
 		log.WithError(err).Fatal("error in marshalling the configmap file with YAML format")
 	}
 
-	err = os.WriteFile(configMapPath, rawConfigMap, 0644)
+	// Remove any quotation mark from the result
+	rawConfigMapWithoutQuotation := strings.Replace(string(rawConfigMap), "'", "", -1)
+
+	err = os.WriteFile(configMapPath, []byte(rawConfigMapWithoutQuotation), 0644)
 	if err != nil {
 		log.WithError(err).WithField("path", configMapPath).Fatal("error in storing the configmap file")
 	}
