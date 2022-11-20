@@ -1,0 +1,3 @@
+[submodule "hugo-whisper"]
+	path = .docs/themes/hugo-whisper-theme
+	url = https://github.com/zerostaticthemes/hugo-whisper-theme
