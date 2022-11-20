@@ -1,6 +1,6 @@
 baseURL = "www.example.com"
 languageCode = "en-us"
-title = "Hugo Whisper Theme"
+title = "Helmfig"
 theme = "hugo-whisper-theme"
 
 pygmentsCodeFences = true
@@ -30,7 +30,7 @@ summaryLength = 30
   google_analytics_id=""
   homepage_button_link = '/docs'
   homepage_button_text = 'Read The Docs'
-  homepage_intro = 'Whisper is a documentation theme built with Hugo. The design and functionality is intentionally minimal.'
+  homepage_intro = 'A handy utility to generate configmap and values.yaml of your application for helmifying them.'
   homepage_image = '/images/terminal.gif'
 
   ## You can enable to add anchor links to header elements
