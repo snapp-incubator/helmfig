@@ -48,5 +48,5 @@ summaryLength = 30
     meta_twitter_creator = "@zerostaticio"
 
   [params.logo]
-      mobile = "/snapp.png"
-      standard  = "/snapp.png"
+      mobile = "snapp.png"
+      standard  = "snapp.png"
