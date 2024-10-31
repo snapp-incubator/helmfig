@@ -21,7 +21,7 @@ var yamlCMD = &cobra.Command{
 func init() {
 	rootCMD.AddCommand(yamlCMD)
 
-	yamlCMD.PersistentFlags().StringVarP(&inputPath, "example-config", "x", "config.example.yml", "Path to example yaml config file")
+	yamlCMD.PersistentFlags().StringVarP(&inputPath, "example-config", "x", "config.example.yaml", "Path to example yaml config file")
 	yamlCMD.PersistentFlags().StringVar(&configMapPath, "configmap", "configmap.yaml", "Path to configmap file output")
 	yamlCMD.PersistentFlags().StringVar(&valuesPath, "values", "values.yaml", "Path to values file output")
 }
@@ -38,8 +38,8 @@ func yamlFunc(_ *cobra.Command, _ []string) {
 		log.WithError(err).Fatal("error in unmarshalling the file with YAML format")
 	}
 
-	var configMap = map[interface{}]interface{}{}
-	var values = map[interface{}]interface{}{}
+	configMap := map[interface{}]interface{}{}
+	values := map[interface{}]interface{}{}
 	traverse(parsedConfig, configMap, values, "")
 
 	rawConfigMap, err := yaml.Marshal(configMap)
@@ -74,8 +74,8 @@ func traverse(m, configMap, values map[interface{}]interface{}, valuesPath strin
 	for k, v := range m {
 		lowerCamelKey := strcase.ToLowerCamel(k.(string))
 		if reflect.TypeOf(v).Kind() == reflect.Map {
-			var localConfigMap = map[interface{}]interface{}{}
-			var localValues = map[interface{}]interface{}{}
+			localConfigMap := map[interface{}]interface{}{}
+			localValues := map[interface{}]interface{}{}
 			traverse(v.(map[interface{}]interface{}), localConfigMap, localValues, valuesPath+lowerCamelKey+".")
 			configMap[k] = localConfigMap
 			values[lowerCamelKey] = localValues
